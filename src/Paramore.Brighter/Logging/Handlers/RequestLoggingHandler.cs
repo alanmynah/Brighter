@@ -23,7 +23,13 @@ THE SOFTWARE. */
 #endregion
 
 using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using Newtonsoft.Json;
+using Paramore.Brighter.Logging.Attributes;
+using Paramore.Brighter.Policies.Attributes;
+using Paramore.Brighter.Policies.Handlers;
+using Polly.CircuitBreaker;
 
 namespace Paramore.Brighter.Logging.Handlers
 {
@@ -86,12 +92,33 @@ namespace Paramore.Brighter.Logging.Handlers
 
         private void LogCommand(TRequest request)
         {
-            _logger.Value.InfoFormat("Logging handler pipeline call. Pipeline timing {0} target, for {1} with values of {2} at: {3}", _timing.ToString(), typeof(TRequest), JsonConvert.SerializeObject(request), DateTime.UtcNow);
+            var obfuscatedRequest = ObfuscateRequest(request);
+            _logger.Value.InfoFormat("Logging handler pipeline call. Pipeline timing {0} target, for {1} with values of {2} at: {3}", _timing.ToString(), typeof(TRequest), JsonConvert.SerializeObject(obfuscatedRequest), DateTime.UtcNow);
         }
 
         private void LogFailure(TRequest request)
         {
-            _logger.Value.InfoFormat("Failure in pipeline call for {0} with values of {1} at: {2}", typeof(TRequest), JsonConvert.SerializeObject(request), DateTime.UtcNow);
+            var obfuscatedRequest = ObfuscateRequest(request);
+            _logger.Value.InfoFormat("Failure in pipeline call for {0} with values of {1} at: {2}", typeof(TRequest), JsonConvert.SerializeObject(obfuscatedRequest), DateTime.UtcNow);
+        }
+        
+        private object ObfuscateRequest<T>(T request)
+        {
+            var requestProperties = request.GetType().GetProperties();
+            var shallowCopy = (IDictionary<string, object>)new ExpandoObject();
+
+            foreach (var property in requestProperties)
+            {
+                shallowCopy.Add(property.Name, property.GetValue(request, null));
+                
+                var obfuscateAttribute =(ObfuscateAttribute)Attribute.GetCustomAttribute(property, typeof(ObfuscateAttribute), true);
+
+                if (obfuscateAttribute is null) continue;
+                
+                shallowCopy[property.Name] = obfuscateAttribute.ObfuscationMessage;
+            }
+
+            return shallowCopy;
         }
     }
 }

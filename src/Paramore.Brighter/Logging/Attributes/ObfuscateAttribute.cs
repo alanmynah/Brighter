@@ -1,6 +1,6 @@
 #region Licence
 /* The MIT License (MIT)
-Copyright © 2015 Ian Cooper <ian_hammond_cooper@yahoo.co.uk>
+Copyright © 2014 Ian Cooper <ian_hammond_cooper@yahoo.co.uk>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
@@ -23,21 +23,16 @@ THE SOFTWARE. */
 #endregion
 
 using System;
-using Paramore.Brighter;
-using Paramore.Brighter.Logging.Attributes;
 
-namespace HelloWorldWithLogging
+namespace Paramore.Brighter.Logging.Attributes
 {
-    internal class GreetingCommandHandler : RequestHandler<GreetingCommand>
+    [AttributeUsage(AttributeTargets.Property)]
+    public class ObfuscateAttribute : Attribute
     {
-        [RequestLogging(step: 1, timing: HandlerTiming.Before)]
-        public override GreetingCommand Handle(GreetingCommand command)
+        public string ObfuscationMessage { get; }
+        public ObfuscateAttribute(string obfuscationMessage = "***Redacted***")
         {
-            Console.WriteLine($"Hello {command.Name}");
-            Console.WriteLine($"This info is not in the logs: '{command.SensitiveInfo}'");
-            Console.WriteLine($"This info has a custom obfuscation message: '{command.CustomlyRedactedSensitiveInfo}'");
-
-            return base.Handle(command);
+            ObfuscationMessage = obfuscationMessage;
         }
     }
 }

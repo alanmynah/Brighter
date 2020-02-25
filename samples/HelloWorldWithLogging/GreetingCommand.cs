@@ -24,12 +24,32 @@ THE SOFTWARE. */
 
 using System;
 using Paramore.Brighter;
+using Paramore.Brighter.Logging.Attributes;
 
 namespace HelloWorldWithLogging
 {
     internal class GreetingCommand : Command
     {
-        public GreetingCommand(string name, string sensitiveInfo) :base(Guid.NewGuid())
+        public GreetingCommand(string name, string sensitiveInfo, string customlyRedactedSensitiveInfo, ComplexProperty someComplexProperty) :base(Guid.NewGuid())
+        {
+            Name = name;
+            SensitiveInfo = sensitiveInfo;
+            CustomlyRedactedSensitiveInfo = customlyRedactedSensitiveInfo;
+            SomeComplexProperty = someComplexProperty;
+        }
+
+        public string Name { get; private set; }
+        [Obfuscate]
+        public string SensitiveInfo { get; private set; }
+        [Obfuscate("***Hidden info here***")]
+        public string CustomlyRedactedSensitiveInfo { get; private set; }
+        
+        public ComplexProperty SomeComplexProperty { get; private set; }
+    }
+
+    internal class ComplexProperty
+    {
+        public ComplexProperty(string name, string sensitiveInfo)
         {
             Name = name;
             SensitiveInfo = sensitiveInfo;

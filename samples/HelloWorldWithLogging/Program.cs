@@ -57,7 +57,11 @@ namespace HelloWorldWithLogging
 
             var commandProcessor = builder.Build();
 
-            commandProcessor.Send(new GreetingCommand("Ian", "My Credit Card pin is 1111"));
+            commandProcessor.Send(new GreetingCommand(
+                "Ian",
+                "My Credit Card pin is 1111",
+                "My other CC pin is 2222", 
+                new ComplexProperty("Prop Name", "Very secret")));
             
             Console.ReadLine();
         }
