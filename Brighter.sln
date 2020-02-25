@@ -177,6 +177,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paramore.Brighter.NoOpStore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paramore.Brighter.PostgresSQL.Tests", "tests\Paramore.Brighter.PostgresSQL.Tests\Paramore.Brighter.PostgresSQL.Tests.csproj", "{C2355F42-792D-4964-B068-79186F887C6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldWithLogging", "samples\HelloWorldWithLogging\HelloWorldWithLogging.csproj", "{B8B016BD-34F3-4A6F-93C1-167308237FCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -895,6 +897,18 @@ Global
 		{C2355F42-792D-4964-B068-79186F887C6D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C2355F42-792D-4964-B068-79186F887C6D}.Release|x86.ActiveCfg = Release|Any CPU
 		{C2355F42-792D-4964-B068-79186F887C6D}.Release|x86.Build.0 = Release|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Debug|x86.Build.0 = Debug|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Release|x86.ActiveCfg = Release|Any CPU
+		{B8B016BD-34F3-4A6F-93C1-167308237FCC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
